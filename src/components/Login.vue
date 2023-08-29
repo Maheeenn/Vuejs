@@ -30,7 +30,7 @@
                       <router-link tag="a" to="/signup">Don't have an account? Signup!</router-link>
                     </div>
                     <div class="d-grid">
-                      <button class="btn btn-signin text-uppercase fw-bold" type="submit" @click="login">
+                      <button class="btn btn-signin text-uppercase fw-bold" type="submit" @click="setLoginUser">
                         Sign in
                       </button>
                     </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+
 import { mapActions } from 'vuex';
 
 export default {
@@ -76,9 +77,8 @@ export default {
   }
 };
 
-
 </script>
-  
+
 <style scoped>
 * {
   padding: 0;

@@ -96,20 +96,20 @@
     <div class="chat-header">Chat with support</div>
    
     <div class="chat-messages">
-      <div
-        v-for="message in messages"
-        :key="message.id"
-        :class="['chat-message', message.type === 'outgoing' ? 'sent' : 'received']"
-      >
-        {{ message.text }}
-      </div>
-    </div>
-    <div class="chat-input">
-      <input v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type your message...">
-      <button @click="sendMessage" class="send-button">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-        </div>
+  <div
+    v-for="message in messages"
+    :key="message.id"
+    :class="['chat-message', message.type === 'outgoing' ? 'sent' : 'received']"
+  >
+    {{ message.text }}
+  </div>
+</div>
+<div class="chat-input">
+  <input v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type your message...">
+  <button @click="sendMessage" class="send-button">
+    <i class="fas fa-paper-plane"></i>
+  </button>
+</div>
       </div>
     </div>
   </div>
@@ -120,9 +120,11 @@
 import io from 'socket.io-client';
 
 export default {  
-  created(){
-    this.connectSocket(); 
-  },
+  created () {
+
+      this.connectSocket();
+    },
+
   data() {
     return {
       created: undefined,
@@ -166,50 +168,58 @@ shouldShowSidebar() {
   return this.sidebarVisible || !this.isMobile;
 },
 
+
     isMobile() {
       return window.innerWidth <= 770; // Adjusting the breakpoint as needed
     },
-    messages() {
-      // Use Vuex state messages array here
-      return this.$store.state.messages;
-    },
+  //   messages() {
+  //   // Return the Vuex state messages array here
+  //   return this.$store.state.messages;
+  // },
     
   },
 
 
   methods: {
-    connectSocket() {
-      this.socket = io('http://192.168.11.213:3000');
-
-      // Listen for incoming messages
-      this.socket.on('receive-message', (data) => {
-        const receivedMessage = {
-          id: Date.now(),
-          text: data.message,
-          type: 'received',
-        };
-        this.addChatMessage(receivedMessage); // Dispatch action to add message to Vuex
-      });
-
-      
-    },
     toggleChat() {
       this.showChat = !this.showChat;
     },
-    async sendMessage() {
+    async connectSocket() {
+      this.socket = io('http://192.168.11.213:3000');
+      // Listen for incoming messages
+      this.socket.on('chatMessage3', async (data) => {
+        console.log("Maheen",data);
+      const receivedMessage = {
+        text: data.message, // Get the message text from the data object
+        type: 'received',
+        reciever: 'gpt',
+      };
+      this.addMessage(data); // Add the message to the messages array
+      
+});
+    },
+   
+     async sendMessage() {
       if (this.newMessage.trim() !== '') {
-        // Emit the message to the backend using Socket.IO
-        this.socket.emit('send-message', { message: this.newMessage });
+        console.log('Sending message:', this.newMessage);
+        // Emit the message object to the backend using Socket.IO
+        const messageObject = {
+          text: this.newMessage,
+          type: 'outgoing',
+          sender: "person"
+        };
+        this.socket.emit('chatMessage3', this.newMessage);
 
         // Assuming the message sent is an outgoing message with an ID
         const sentMessage = {
-          id: Date.now(),
-          text: this.newMessage,
-          type: 'outgoing',
+          message: messageObject,
         };
-        this.sessages.push(sentMessage);
-      this.newMessage = ''; // Clear the input field
+        this.addMessage(sentMessage);
+        this.newMessage = ''; // Clear the input field
       }
+    },
+       addMessage(message) {
+      this.messages.push(message);
     },
        toggleSidebar() {
       this.sidebarVisible = !this.sidebarVisible;
@@ -252,15 +262,17 @@ shouldShowSidebar() {
 }
 
 .received {
-  background-color: #1e3a58;
-  color: white;
+  background-color: #767a80;
+  color: rgb(37, 34, 34);
+  font-size: large;
   text-align: left;
 }
-
-* New styles for toggling sidebar on mobile */
-
-
-
+.sendMessage{
+  align-self: flex-end; /* Align sent messages to the right */
+  background-color: #0C134F;
+  color: white;
+  text-align: right;
+}
 .toggled-width {
   width: 90px; /* Adjust as needed */
   transition: width 0.3s;

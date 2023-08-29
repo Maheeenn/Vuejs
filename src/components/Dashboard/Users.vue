@@ -77,15 +77,10 @@
           this.isLoading = false; // Set to false when loading is done
         });
     },
-  //   methods: {
-  //   showUserDetails(item) {
-  //     this.selectedUser = item;
-  //     $('#userDetailsModal').modal('show'); // Show the modal
-  //   },
-  // },
+ 
 };
   </script>
-  
+            
   
   <style scopped>
   .users-heading {

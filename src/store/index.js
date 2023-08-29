@@ -9,7 +9,7 @@ export default new Vuex.Store({
     password: '',
     registeredUsers: [],
     loggedInUsers: [],
-    // messages: [] // Array to store chat messages
+   
   },
   getters: {
     getRegister(state) {
@@ -17,12 +17,12 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setEmail(state, email) {
-      state.email = email;
-    },
-    setPassword(state, password) {
-      state.password = password;
-    },
+    // setEmail(state, email) {
+    //   state.email = email;
+    // },
+    // setPassword(state, password) {
+    //   state.password = password;
+    // },
     addRegisteredUser(state, user) {
       // console.log("Adding registered user:", user);
       state.registeredUsers.push(user);
@@ -30,11 +30,10 @@ export default new Vuex.Store({
     loginUser(state, user) {
       state.loggedInUsers.push(user);
     },
-    addMessage(state, message) {
-      state.messages.push(message);
-    },
+   
   },
-  actions: {
+  actions:
+   {
     async login({ commit }, credentials) {
       try {
         axios.post('http://192.168.11.213:3000/users/login', credentials);
@@ -55,10 +54,7 @@ export default new Vuex.Store({
       }
     },
 
-    // Action to dispatch the mutation and add a message
-    addChatMessage({ commit }, message) {
-      commit('addMessage', message);
-    }
+   
   },
   modules: {}
 });

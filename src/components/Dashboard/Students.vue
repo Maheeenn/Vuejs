@@ -24,12 +24,8 @@
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-
         </div>
-      </div>
-
-
-    
+      </div> 
 
       <!-- table of applicants -->
       <table class="table-responsive">
@@ -44,7 +40,7 @@
             <th>DOB</th>
             <th>CV</th>
             <th>Status</th>
-            <th>Latest Status</th>
+            <!-- <th>Latest Status</th> -->
           </tr>
         </thead>
         <tbody>
@@ -70,15 +66,11 @@
                 </label>
                 </td>
 
-            <td>{{ user.latestStatus }}</td>
+            <!-- <td>{{ user.latestStatus }}</td> -->
             </tr>
           </tbody>
       </table>
-      <a @click="downloadCV(user.id)">
-    <i v-if="downloadingCV" class="loader-icon fas fa-spinner fa-spin"></i>
-    <i v-else class="download-icon fas fa-download"></i>
-  </a>
-        
+      
       
       <!-- Pagination -->
       <div class="pagination">

@@ -10,6 +10,8 @@
 import Navbar from "./Navbar.vue"
 
 export default{
+  props: {
+  },
 
     components:{
   Navbar,

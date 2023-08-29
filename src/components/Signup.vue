@@ -11,18 +11,14 @@
                                
                                 <div class="col-md-9 col-lg-8 mx-auto">
                                   <h3 class="signup-heading mb-5">Create an account!</h3>
-                                  <form @submit.prevent="register">
+                                  <form>
                                     <div class="row mb-3">
                                       <div class="col-lg-6 input">
-                                        <label for="first-name">First Name</label>
-                                        <input type="text" class="form-control" id="first-name" placeholder=" first name"
+                                        <label for="first-name">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder=" first name"
                                           v-model.lazy="firstName" title="Please enter only your first name." required />
                                       </div>
-                                      <div class="col-lg-6 input">
-                                        <label for="last-name">Last Name</label>
-                                        <input type="text" class="form-control" id="last-name" placeholder="last name"
-                                          v-model.lazy="lastName" title="Please enter only your last name." required>
-                                      </div>
+                                     
                                     </div>
                                     <div class="mb-3 input">
                                       <label for="email">Email</label>
@@ -61,7 +57,8 @@
                  
                 
                   <script>
-                  import { mapActions } from 'vuex';
+  
+  import { mapActions } from 'vuex';
                   
                   export default {
                     data() {
@@ -126,6 +123,7 @@
                       },
                     },
                   };
+
                   </script>
                 
                  
@@ -222,7 +220,7 @@
                 
                   .signup-heading {
                     font-size: 2.3rem;
-                    color: rgb(194, 186, 186);
+                    color: rgb(31, 30, 30);
                   }
                   .form-control {
                     background-color: transparent;

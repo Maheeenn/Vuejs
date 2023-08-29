@@ -10,6 +10,7 @@ import Students from '@/components/Dashboard/Students.vue'
 import Teachers from '@/components/Dashboard/Teachers.vue';
 import jobFrom from '@/components/jobFrom.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
